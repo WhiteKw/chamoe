@@ -7,8 +7,10 @@ require("dotenv").config();
 router.post("/", (req, res) => {
   if (true) {
     const user = {
-      id: "keyongwon329",
+      id: req.body.userid,
     };
+
+    console.log(req.body.userid);
 
     // Access Token과 Refresh Token 발급
     const accessToken = jwt.sign(user);

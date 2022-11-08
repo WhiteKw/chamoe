@@ -14,7 +14,7 @@ module.exports = {
 
     return jwt.sign(payload, accessTokenSecret, {
       algorithm: "HS256",
-      expiresIn: "1h",
+      expiresIn: "5s",
     });
   },
   // Access Token 검증
@@ -40,7 +40,7 @@ module.exports = {
   refresh: () => {
     return jwt.sign({}, refreshTokenSecret, {
       algorithm: "HS256",
-      expiresIn: "14d",
+      expiresIn: "10s",
     });
   },
   // Refresh Token 검증
