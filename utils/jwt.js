@@ -45,13 +45,9 @@ module.exports = {
   },
   // Refresh Token 검증
   refreshVerify: async (token, userId) => {
-    /* redis 모듈은 기본적으로 promise를 반환하지 않으므로,
-       promisify를 이용하여 promise를 반환하게 해준다. */
-    const getAsync = promisify(redisClient.get).bind(redisClient);
-
     try {
       // Refresh Token 가져오기
-      const data = await getAsync(userId);
+      const data = await redisClient.getVal(userId);
 
       if (token === data) {
         try {

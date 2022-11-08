@@ -9,9 +9,8 @@ const redisClient = require("./utils/redis");
 
 app.listen(8081, function () {
   console.log("listening on 8081");
+  redisClient.run();
 });
-
-redisClient.connect();
 
 app.use(express.static(path.join(__dirname, "client/build")));
 

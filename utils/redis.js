@@ -1,5 +1,15 @@
 const redis = require("redis");
-require("dotenv").config();
+
 const redisClient = redis.createClient();
 
-module.exports = redisClient;
+module.exports = {
+    run: async () => {
+        await redisClient.connect();
+    },
+    setVal: async (key, value) => {
+        await redisClient.set(key, value);
+    },
+    getVal: async (key) => {
+        return await redisClient.get(key);
+    }
+}
