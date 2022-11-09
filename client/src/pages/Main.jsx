@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CallAPI from "CallAPI";
 
 import Definition from "Definition";
@@ -45,6 +45,13 @@ function Main() {
   // const [viewOption, setViewOption] = useState(0);
 
   const [songViewOption, setSongViewOption] = useState(0);
+
+  useEffect(() => {
+    CallAPI(process.env.REACT_APP_API_URL + "/hello")
+    .then(res => {
+      console.log(res);
+    });
+  }, []);
 
 
   // const getSongListOfName = async (songName: string) => {
