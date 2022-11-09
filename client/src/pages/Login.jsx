@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { authService } from "util/fbase";
+
 function Copyright(props) {
   return (
     <Typography
@@ -34,13 +36,16 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function LogIn() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    try {
+      const loginData = await authService.signInWithEmailAndPassword(data.get("email"), data.get("password"));
+      console.log(loginData);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

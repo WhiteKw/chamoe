@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import CallAPI from "CallAPI";
+import CallAPI from "util/CallAPI";
 
-import Definition from "Definition";
+import Definition from "util/Definition";
 
 import DataTable from "react-data-table-component";
 

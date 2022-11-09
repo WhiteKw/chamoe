@@ -15,7 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 import LogoDevIcon from '@mui/icons-material/LogoDev';
 
-import Definition from "Definition";
+import Definition from "util/Definition";
 
 import Icon from "@mui/material/Icon";
 
