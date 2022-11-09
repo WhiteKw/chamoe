@@ -1,14 +1,19 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
-import Main from './pages/Main';
-import NotFound from './pages/NotFound';
+
+import Navigation from "Components/Navigation/Navigation";
+
+import Main from 'pages/Main';
+
+import NotFound from 'pages/NotFound';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main/>}/>
-        <Route path="*" element={<NotFound/>}/>
+        <Route element={<Navigation />}>
+          <Route path="/" element={<Main/>}/>
+          <Route path="*" element={<NotFound/>}/>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
