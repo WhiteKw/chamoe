@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const { promisify } = require("util");
 const redisClient = require("./redis");
 require("dotenv").config();
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
@@ -14,7 +13,7 @@ module.exports = {
 
     return jwt.sign(payload, accessTokenSecret, {
       algorithm: "HS256",
-      expiresIn: "5s",
+      expiresIn: "1h",
     });
   },
   // Access Token 검증
@@ -40,7 +39,7 @@ module.exports = {
   refresh: () => {
     return jwt.sign({}, refreshTokenSecret, {
       algorithm: "HS256",
-      expiresIn: "10s",
+      expiresIn: "90d",
     });
   },
   // Refresh Token 검증
