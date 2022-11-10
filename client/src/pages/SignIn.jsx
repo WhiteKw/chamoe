@@ -35,13 +35,16 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function LogIn() {
+export default function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
     try {
-      const loginData = await authService.signInWithEmailAndPassword(data.get("email"), data.get("password"));
+      const loginData = await authService.signInWithEmailAndPassword(
+        data.get("email"),
+        data.get("password")
+      );
       console.log(loginData);
     } catch (error) {
       console.log(error);
