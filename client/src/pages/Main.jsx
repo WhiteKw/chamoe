@@ -46,13 +46,6 @@ function Main() {
 
   const [songViewOption, setSongViewOption] = useState(0);
 
-  useEffect(() => {
-    CallAPI(process.env.REACT_APP_API_URL + "/hello")
-    .then(res => {
-      console.log(res);
-    });
-  }, []);
-
 
   // const getSongListOfName = async (songName: string) => {
   //   axios.get(`https://api.manana.kr/karaoke/song/${songName}.json`)

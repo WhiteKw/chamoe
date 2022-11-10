@@ -55,7 +55,7 @@ const Navigation = () => {
             <Toolbar disableGutters>
             {/* PC View */}
             {/* <LogoDevIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }} /> */}
-            <Link to={process.env.REACT_APP_ROOT_PATH + "/"}>
+            <Link to="/">
                 <Typography>Logo</Typography>
             </Link>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, height: "80px" }}>

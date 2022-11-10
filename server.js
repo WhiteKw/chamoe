@@ -32,12 +32,15 @@ app.get("/", function (req, res) {
 app.use("/login", loginRouter);
 app.use("/refresh", refreshRouter);
 
-app.get("/hello", function (req, res) {
+app.get("/api/get/lyric", function (req, res) {
   // res.writeHead(200, {"Content-Type": "application/json; charset=UTF-8"});
-  const result = spawn("python", ["./python/lyric_crawling.py", "사건의 지평선"]);
+
+  console.log(req.query.lyric);
+
+  const result = spawn("python", ["./python/lyric_crawling.py", req.query.lyric]);
 
   result.stdout.on("data", data => {
-    res.send(data.toString());
+    res.send({ lyric: data.toString() });
   });
 
   result.stderr.on("data", data => {

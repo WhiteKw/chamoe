@@ -29,7 +29,14 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
 songTitle = sys.argv[1]
 
 url = "https://music.bugs.co.kr/search/integrated?q=" + songTitle
-driver = webdriver.Chrome()
+options = webdriver.ChromeOptions()
+options.add_argument("headless")
+options.add_argument("disable-gpu")
+options.add_argument("lang=ko_KR")
+
+driver = webdriver.Chrome('chromedriver', options=options)
+# 암묵적으로 웹 자원 로드를 위해 2초까지 기다려 준다.
+driver.implicitly_wait(2)
 driver.get(url)
 driver.find_element(By.CLASS_NAME, "list.trackList").find_element(
     By.TAG_NAME, "tbody").find_element(By.CLASS_NAME, "trackInfo").click()
@@ -55,8 +62,10 @@ try:
 
     print(lyric.getText().strip())
 
+    quit()
+
     #lambda lyric : lyric
 except IOError:
     print("URL 주소가 올바르지 않습니다.")
-except:
-    print("오류가 발생하였습니다. 다시 시도해주십시오.")
+# except:
+#    print("오류가 발생하였습니다. 다시 시도해주십시오.")

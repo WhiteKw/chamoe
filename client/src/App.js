@@ -4,8 +4,10 @@ import { authService } from "util/fbase";
 
 import Navigation from "components/Navigation/Navigation";
 import Main from "pages/Main";
-import LogIn from "pages/Login";
+import SongInfo from "pages/SongInfo";
+import Login from "pages/Login";
 import SignUp from "pages/SignUp";
+
 import NotFound from "pages/NotFound";
 
 function App() {
@@ -30,7 +32,8 @@ function App() {
       <Routes>
         <Route element={<Navigation />}>
           <Route path="/" element={<Main />} />
-          <Route path="/login" element={<LogIn />} />
+          <Route path="/song-info" element={<SongInfo />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
         </Route>

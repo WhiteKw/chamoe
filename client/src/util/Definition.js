@@ -4,13 +4,6 @@ const Definition = {
             name: "노래방",
             selector: row => row.brand,
             sortable: true,
-            format: row => {
-                if (row.brand == "uga" || row.brand == "joysound" || row.brand == "dam") {
-                    return;
-                }
-
-                return row.brand;
-            },
         },
         {
             name: "곡 번호",
