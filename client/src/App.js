@@ -10,8 +10,8 @@ import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
 
 // 로그인여부에 따라 라우팅 제어
-import AuthSigned from "components/AuthSigned";
-import AuthUnsigned from "components/AuthUnsigned";
+import RequireSign from "components/RequireSign";
+import RequireUnsign from "components/RequireUnsign";
 
 // 404
 import NotFound from "pages/NotFound";
@@ -38,20 +38,20 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route element={<Navigation />}>
+              {/* 로그인 여부 상관 없이 접근 가능 */}
               <Route path="/" element={<Main />} />
               <Route path="/song-info" element={<SongInfo />} />
-              <Route
-                path="/signin"
-                element={
-                  <AuthUnsigned isLoggedIn={isLoggedIn} element={<SignIn />} />
-                }
-              />
-              <Route
-                path="/signup"
-                element={
-                  <AuthUnsigned isLoggedIn={isLoggedIn} element={<SignUp />} />
-                }
-              />
+
+              {/* 로그인 헀을때만 접근 가능 */}
+              <Route element={<RequireSign isLoggedIn={isLoggedIn} />}></Route>
+
+              {/* 로그인 안했을때만 접근 가능 */}
+              <Route element={<RequireUnsign isLoggedIn={isLoggedIn} />}>
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/signup" element={<SignUp />} />
+              </Route>
+
+              {/* 404 */}
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
