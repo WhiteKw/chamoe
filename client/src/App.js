@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { authService } from "util/fbase";
 
 // Views
@@ -19,6 +19,8 @@ import NotFound from "pages/NotFound";
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
@@ -42,9 +44,7 @@ function App() {
               <Route path="/song-info" element={<SongInfo />} />
               <Route
                 path="/signin"
-                element={
-                  <AuthUnsigned isLoggedIn={isLoggedIn} element={<SignIn />} />
-                }
+                element={!isLoggedIn ? <SignIn/> : <>{navigate("/")}</>}
               />
               <Route
                 path="/signup"

@@ -58,6 +58,12 @@ const Navigation = () => {
             <Link to="/">
                 <Typography>Logo</Typography>
             </Link>
+            <Link to="/signin">
+                <Typography>로그인</Typography>
+            </Link>
+            <Link to="/signup">
+                <Typography>회원가입</Typography>
+            </Link>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, height: "80px" }}>
                 {pages.map((page, index) => {
                         if (index == 0) {

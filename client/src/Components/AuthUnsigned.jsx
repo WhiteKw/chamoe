@@ -5,12 +5,17 @@ function AuthUnsigned(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!props.isLoggedIn) {
-      return props.element;
-    } else {
-      navigate("/");
+    const authCheck = async () => {
+      if (!props.isLoggedIn) {
+        return props.element;
+      } else {
+        navigate("/");
+      }
     }
+
+    authCheck();
   }, []);
+  
 }
 
 export default AuthUnsigned;

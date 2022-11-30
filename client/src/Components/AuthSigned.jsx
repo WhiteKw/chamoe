@@ -5,11 +5,15 @@ function AuthSigned(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (props.isLoggedIn) {
-      return props.element;
-    } else {
-      navigate("/login");
+    const authCheck = async () => {
+      if (props.isLoggedIn) {
+        return props.element;
+      } else {
+        navigate("/login");
+      }
     }
+
+    authCheck();
   }, []);
 }
 
