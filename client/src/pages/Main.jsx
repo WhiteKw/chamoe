@@ -1,27 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import CallAPI from "util/CallAPI";
-
-import Definition from "util/Definition";
-
 import DataTable from "react-data-table-component";
 
-import {
-  Container,
-  Typography,
-  Card,
-  CardActions,
-  CardContent,
-  Button,
-  Box,
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@mui/material";
+import CallAPI from "util/CallAPI";
+import Definition from "util/Definition";
+
+import Container from 'components/container/Container';
+import SearchBar from 'components/searchBar/SearchBar';
+import ToggleSwitch from 'components/ToggleSwitch';
+
 
 const SEARCH_SONG_OF_NAME = 0;
 const SEARCH_SONG_OF_SINGER_NAME = 1;
@@ -35,6 +21,11 @@ const searchType = {
   0: "SongName",
   1: "SignerName",
 }
+
+const compType = [
+  "tj",
+  "kumyoung"
+]
 
 function Main() {
   const [songSearchType, setSongSearchType] = useState(0);
@@ -74,10 +65,10 @@ function Main() {
 
     switch (songSearchType) {
       case SEARCH_SONG_OF_NAME: 
-        apiURL = `https://api.manana.kr/karaoke/song/${inputText}.json`;
+        apiURL = `https://api.manana.kr/karaoke/song/${inputText}/${compType[songViewOption]}.json`;
         break;
       case SEARCH_SONG_OF_SINGER_NAME:
-        apiURL = `https://api.manana.kr/karaoke/singer/${inputText}.json`;
+        apiURL = `https://api.manana.kr/karaoke/singer/${inputText}/${compType[songViewOption]}.json`;
         break;
       default:
         console.error("Error: 검색 유형을 다시 선택해주세요.");
@@ -94,24 +85,17 @@ function Main() {
   }
 
   return (
-    <Container maxWidth="xl">
-      <input placeholder="이름으로 곡 검색" value={inputText} onChange={(e) => { setInputText(e.target.value.toString()) }} />
-
-      <select value={songSearchType} onChange={(e) => { setSongSearchType(Number(e.target.value)) }}>
-        <option value={0}>이름으로 곡 검색</option>
-        <option value={1}>가수 이름으로 곡 검색</option>
-      </select>
-
-      <button onClick={songSearch}>
-        Search
-      </button>
-
-      <select value={songViewOption} onChange={(e) => { setSongViewOption(Number(e.target.value)) }}>
-        <option value={0}>전체</option>
-        <option value={1}>TJ 노래방</option>
-        <option value={2}>KY 노래방</option>
-        <option value={3}>JOY SOUND 노래방</option>
-      </select>
+    <Container>
+      <SearchBar
+        type={songSearchType}
+        typeHandler={setSongSearchType}
+        compValue={songViewOption}
+        compHandler={setSongViewOption}
+        value={inputText}
+        valueHandler={(e) => {setInputText(e.target.value.toString())}}
+        searchHandler={songSearch}
+        style={{marginBottom:"20px"}}
+      />
 
       {songList &&
         <DataTable

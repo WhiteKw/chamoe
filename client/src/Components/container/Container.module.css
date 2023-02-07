@@ -1,0 +1,11 @@
+.Wrap {
+  max-width: 980px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+  .Wrap {
+    padding: 20px 10px;
+  }
+}

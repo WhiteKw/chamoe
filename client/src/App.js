@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { authService } from "util/fbase";
 
 // Views
+import Header from "components/header/Header";
 import Navigation from "components/Navigation/Navigation";
 import Main from "pages/Main";
 import SongInfo from "pages/SongInfo";
@@ -20,7 +21,7 @@ function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const navigate = useNavigate();
+ 
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
@@ -38,24 +39,24 @@ function App() {
     <div>
       {init ? (
         <BrowserRouter>
+          <Header/>
+
           <Routes>
-            <Route element={<Navigation />}>
-              {/* 로그인 여부 상관 없이 접근 가능 */}
-              <Route path="/" element={<Main />} />
-              <Route path="/song-info" element={<SongInfo />} />
+            {/* 로그인 여부 상관 없이 접근 가능 */}
+            <Route path="/" element={<Main />} />
+            <Route path="/song-info" element={<SongInfo />} />
 
-              {/* 로그인 헀을때만 접근 가능 */}
-              <Route element={<RequireSign isLoggedIn={isLoggedIn} />}></Route>
+            {/* 로그인 헀을때만 접근 가능 */}
+            <Route element={<RequireSign isLoggedIn={isLoggedIn} />}></Route>
 
-              {/* 로그인 안했을때만 접근 가능 */}
-              <Route element={<RequireUnsign isLoggedIn={isLoggedIn} />}>
-                <Route path="/signin" element={<SignIn />} />
-                <Route path="/signup" element={<SignUp />} />
-              </Route>
-
-              {/* 404 */}
-              <Route path="*" element={<NotFound />} />
+            {/* 로그인 안했을때만 접근 가능 */}
+            <Route element={<RequireUnsign isLoggedIn={isLoggedIn} />}>
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/signup" element={<SignUp />} />
             </Route>
+
+            {/* 404 */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       ) : (
